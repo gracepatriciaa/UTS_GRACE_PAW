@@ -1,22 +1,25 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const mahasiswaRoutes = require('./routes/mahasiswaRoutes');
+const mahasiswaRoutes = require('./routes/mahasiswaRoutes'); // Pastikan path ini benar
 
 const app = express();
 app.use(express.json());
 
-// Koneksi ke database MongoDB
+// Koneksi ke MongoDB
 mongoose.connect('mongodb://localhost:27017/dbPariwisata', {
   useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true
+  useUnifiedTopology: true
+}).then(() => {
+  console.log('Berhasil terhubung ke MongoDB');
+}).catch(error => {
+  console.error('Gagal terhubung ke MongoDB:', error.message);
 });
 
-// Menggunakan route mahasiswa
+// Route mahasiswa
 app.use('/api/mahasiswa', mahasiswaRoutes);
 
 // Jalankan server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log('Server berjalan di port ${PORT}');
+  console.log('Server berjalan di port ${3000}');
 });
