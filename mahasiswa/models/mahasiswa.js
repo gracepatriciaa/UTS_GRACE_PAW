@@ -1,7 +1,23 @@
-const mongoose =  require('mongoose');
+// models/Mahasiswa.js
+
+const mongoose = require('mongoose');
+
+// Definisikan struktur data mahasiswa
 const MahasiswaSchema = new mongoose.Schema({
-    nama : String,
-    nim : String,
-    jurusan : String
+  nama: {
+    type: String,
+    required: true
+  },
+  nim: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  jurusan: {
+    type: String,
+    required: true
+  }
 });
-module.exports = mongoose.model('Mahasiswa',MahasiswaSchema);
+
+// Ekspor model untuk digunakan di bagian lain aplikasi
+module.exports = mongoose.model('Mahasiswa', MahasiswaSchema);
